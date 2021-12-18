@@ -6,26 +6,18 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { episodeDetails } from '../actions/showActions';
 
-const Episode = ({ history, match }) => {
-  console.log('Episode View');
-  console.log(match.params.id);
+const Episode = ({ match }) => {
   const dispatch = useDispatch();
-
-  const loadShow = useSelector((state) => state.showList);
-  const episode = useSelector((state) => state.episodeDetails);
-  console.log(loadShow);
-  const { loading, error, shows } = loadShow;
-  console.log(episode);
-  //let [episode] = episodeDetail;
+  const { loading, error, episode } = useSelector(
+    (state) => state.episodeDetails
+  );
   useEffect(() => {
-    console.log(' use effect in Episode');
     dispatch(episodeDetails(match.params.id));
   }, [dispatch, match.params.id]);
 
   return (
     <>
-      {console.log('Episode')}
-      <Link className="btn btn-light my-3" to="/">
+      <Link className="btn btn-dark my-3" to="/">
         Go Back
       </Link>
       {loading ? (
@@ -35,12 +27,15 @@ const Episode = ({ history, match }) => {
       ) : (
         <Row>
           <Col md={6}>
-            <Image src={episode?.image?.medium} alt={episode?.name} fluid />
+            <Image src={episode.image?.original} alt={episode?.name} fluid />
           </Col>
           <Col md={3}>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2>{episode?.summary}</h2>
+                <h3>{episode.name}</h3>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <p>{episode.summary}</p>
               </ListGroup.Item>
             </ListGroup>
           </Col>

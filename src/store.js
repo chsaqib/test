@@ -1,22 +1,20 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { showsListReducer } from './reducers/showsReducer';
-import {
-  episodeListReducer,
-  episodeDetailsReducer,
-} from './reducers/episodesReducer';
-const reducer = combineReducers({
+import { showsListReducer } from './reducers/showsListReducer';
+import { episodeDetailsReducer } from './reducers/episodeDetailsReducer';
+import { episodesListReducer } from './reducers/episodesListReducer';
+const rootReducer = combineReducers({
   showList: showsListReducer,
-  episodesList: episodeListReducer,
-  episodeDetais: episodeDetailsReducer,
+  episodesList: episodesListReducer,
+  episodeDetails: episodeDetailsReducer,
 });
 
 const initialState = {};
 const middleware = [thunk];
 
 const store = createStore(
-  reducer,
+  rootReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );

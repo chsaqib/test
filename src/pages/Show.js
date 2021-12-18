@@ -7,15 +7,11 @@ import { episodesList, listShows } from '../actions/showActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-//import show from '../showdata';
-
 const Show = () => {
   const dispatch = useDispatch();
-  const loadShow = useSelector((state) => state.showList);
-  const loadEpisodes = useSelector((state) => state.episodesList);
-  const { loading, error, shows } = loadShow;
-  const { episodes } = loadEpisodes;
-  console.log(loadShow);
+  const { loading, error, shows } = useSelector((state) => state.showList);
+  const { episodes } = useSelector((state) => state.episodesList);
+
   useEffect(() => {
     dispatch(listShows());
     dispatch(episodesList());
@@ -31,14 +27,13 @@ const Show = () => {
           <Col md={12} key={shows.id}>
             <ShowDetails show={shows} />
           </Col>
+          <Col className="py-3 " key={episodes.id}>
+            <h2>Episodes List</h2>
+            <EpisodeList episodes={episodes} />
+          </Col>
         </Row>
       )}
-      <Row>
-        <Col className="py-3 " key={episodes.id}>
-          <h2>Episodes List</h2>
-          <EpisodeList episodes={episodes} />
-        </Col>
-      </Row>
+      <Row></Row>
     </>
   );
 };

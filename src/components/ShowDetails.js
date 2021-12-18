@@ -10,7 +10,7 @@ const ShowDetails = ({ show }) => {
       <Row>
         <Col md={3}>
           <Image
-            src={show?.image?.original}
+            src={show.image.original}
             alt={show.name}
             fluid
             //style={imgStyle}

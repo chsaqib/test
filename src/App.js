@@ -1,5 +1,4 @@
 import './App.css';
-
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Show from './pages/Show';
@@ -14,11 +13,7 @@ function App() {
       <main className="py-3">
         <Container>
           <Route path="/" component={Show} exact />
-          <Route
-            path="/Episode/:id"
-            component={Episode}
-            key={document.location.href}
-          />
+          <Route path="/Episode/:id" component={Episode} />
         </Container>
       </main>
       <Footer />
