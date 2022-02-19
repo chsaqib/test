@@ -1,4 +1,8 @@
-import { SHOW_LIST_SUCCESS, SHOW_LIST_FAIL } from '../constants/showConstants';
+import {
+  SHOW_LIST_REQUEST,
+  SHOW_LIST_SUCCESS,
+  SHOW_LIST_FAIL,
+} from '../constants/showConstants';
 
 const initialState = {
   shows: [],
@@ -7,6 +11,8 @@ const initialState = {
 
 export const showsListReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SHOW_LIST_REQUEST:
+      return { ...state, loading: true };
     case SHOW_LIST_SUCCESS:
       return { ...state, loading: false, shows: action.payload };
     case SHOW_LIST_FAIL:

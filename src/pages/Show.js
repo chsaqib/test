@@ -33,7 +33,6 @@ const Show = () => {
           </Col>
         </Row>
       )}
-      <Row></Row>
     </>
   );
 };

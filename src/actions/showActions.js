@@ -5,13 +5,21 @@ import {
   EPISODES_LIST_FAIL,
   EPISODE_DETAILS_SUCCESS,
   EPISODE_DETAILS_FAIL,
+  EPISODE_DETAILS_REQUEST,
+  SHOW_LIST_REQUEST,
+  EPISODES_LIST_REQUEST,
 } from '../constants/showConstants';
-import axios from 'axios';
 
+import {
+  getEpisodeDetails,
+  getEpisodes,
+  getShow,
+} from '../services/show.service';
 //fechting show from Tv Maze api
 export const listShows = () => async (dispatch) => {
   try {
-    const response = await axios.get('https://api.tvmaze.com/shows/6771');
+    dispatch({ type: SHOW_LIST_REQUEST });
+    const response = await getShow();
     const data = response.data;
 
     dispatch({
@@ -33,9 +41,9 @@ export const listShows = () => async (dispatch) => {
 
 export const episodesList = () => async (dispatch) => {
   try {
-    const response = await axios.get(
-      'https://api.tvmaze.com/shows/6771/episodes'
-    );
+    dispatch({ type: EPISODES_LIST_REQUEST });
+    const response = await getEpisodes();
+
     const data = response.data;
     //console.log(data);
 
@@ -58,7 +66,8 @@ export const episodesList = () => async (dispatch) => {
 
 export const episodeDetails = (id) => async (dispatch) => {
   try {
-    const response = await axios.get(`https://api.tvmaze.com/episodes/${id}`);
+    dispatch({ type: EPISODE_DETAILS_REQUEST });
+    const response = await getEpisodeDetails(id);
     const data = response.data;
 
     dispatch({
